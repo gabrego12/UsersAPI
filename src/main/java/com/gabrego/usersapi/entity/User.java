@@ -30,8 +30,10 @@ public class User {
     @Column(name = "user_type", nullable = false)
     private int user_type;
 
-    @Column(name = "status", nullable = false)
-    private int status;
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
+
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
@@ -41,9 +43,10 @@ public class User {
     @UpdateTimestamp
     private Date updated_at;
 
+
     public User() {}
 
-    public User(int id, String name, String email, String password, int remember, int user_type, int status) {
+    public User(int id, String name, String email, String password, int remember, int user_type, Status status) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -101,11 +104,11 @@ public class User {
         this.user_type = user_type;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

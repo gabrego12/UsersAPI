@@ -1,7 +1,7 @@
 package com.gabrego.usersapi.service;
 
-import com.gabrego.usersapi.dao.PatientDAO;
-import com.gabrego.usersapi.entity.Patient;
+import com.gabrego.usersapi.dao.DoctorDAO;
+import com.gabrego.usersapi.entity.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,38 +11,38 @@ import java.util.List;
 public class PatientServiceImpl implements PatientService{
 
     @Autowired
-    private PatientDAO patientDAO;
+    private DoctorDAO doctorDAO;
 
     @Override
-    public List<Patient> findAll() {
-        List<Patient> patients = patientDAO.findAll();
-        return patients;
+    public List<Doctor> findAll() {
+        List<Doctor> doctors = doctorDAO.findAll();
+        return doctors;
     }
 
     @Override
-    public Patient findById(int id) {
-        Patient patient = patientDAO.findById(id);
-        return patient;
+    public Doctor findById(int id) {
+        Doctor doctor = doctorDAO.findById(id);
+        return doctor;
     }
 
     @Override
-    public Patient findByUserId(int id) {
-        Patient patient = patientDAO.findByUserId(id);
-        return patient;
+    public Doctor findByUserId(int id) {
+        Doctor doctor = doctorDAO.findByUserId(id);
+        return doctor;
     }
 
     @Override
-    public void save(Patient patient) {
-        patientDAO.save(patient);
+    public void save(Doctor doctor) {
+        doctorDAO.save(doctor);
     }
 
     @Override
     public int deleteById(int id) {
-        return patientDAO.deleteById(id);
+        return doctorDAO.deleteById(id);
     }
 
     @Override
     public int deleteByUserId(int id) {
-        return patientDAO.deleteByUserId(id);
+        return doctorDAO.deleteByUserId(id);
     }
 }

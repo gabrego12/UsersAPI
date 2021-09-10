@@ -1,10 +1,10 @@
-package com.gabrego.usersapi.service;
+package com.gabrego.usersapi.dao;
 
 import com.gabrego.usersapi.entity.Doctor;
 
 import java.util.List;
 
-public interface PatientService {
+public interface DoctorDAO {
     public List<Doctor> findAll();
 
     public Doctor findById(int id);

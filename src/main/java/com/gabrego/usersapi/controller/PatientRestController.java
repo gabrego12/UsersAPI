@@ -1,6 +1,6 @@
 package com.gabrego.usersapi.controller;
 
-import com.gabrego.usersapi.entity.Patient;
+import com.gabrego.usersapi.entity.Doctor;
 import com.gabrego.usersapi.entity.User;
 import com.gabrego.usersapi.service.PatientService;
 import com.gabrego.usersapi.service.UserService;
@@ -21,40 +21,40 @@ public class PatientRestController {
     private UserService userService;
 
     @GetMapping("/")
-    public List<Patient> findAllPatient() {
+    public List<Doctor> findAllPatient() {
         return patientService.findAll();
     }
 
     @GetMapping("/{userId}")
-    public Patient getPatientById(@PathVariable int userId){
-        Patient patient = patientService.findById(userId);
+    public Doctor getPatientById(@PathVariable int userId){
+        Doctor doctor = patientService.findById(userId);
 
-        if(patient == null) {
+        if(doctor == null) {
             throw new RuntimeException("User id not found -"+userId);
         }
         //retornará al usuario con id pasado en la url
-        System.out.println(patient);
-        return patient;
+        System.out.println(doctor);
+        return doctor;
     }
 
     @PostMapping("/")
-    public Patient addPatient(@RequestBody Patient patient) {
-        patient.setId(0);
-        User user = userService.findById(patient.getUser_id().getId());
-        patient.setUser_id(user);
+    public Doctor addPatient(@RequestBody Doctor doctor) {
+        doctor.setId(0);
+        User user = userService.findById(doctor.getUser_id().getId());
+        doctor.setUser_id(user);
         //Este metodo guardará al usuario enviado
-        patientService.save(patient);
+        patientService.save(doctor);
 
-        return patient;
+        return doctor;
 
     }
 
     @DeleteMapping("/{patientId}")
     public int deletePatientById(@PathVariable int patientId) {
 
-        Patient patient = patientService.findById(patientId);
+        Doctor doctor = patientService.findById(patientId);
 
-        if(patient == null) {
+        if(doctor == null) {
             throw new RuntimeException("User id not found -"+patientId);
         }
 
@@ -62,11 +62,11 @@ public class PatientRestController {
     }
 
     @DeleteMapping("users/patients/userid/{userId}")
-    public int detetePatientByUserId(@PathVariable int userId) {
+    public int deletePatientByUserId(@PathVariable int userId) {
 
-        Patient patient = patientService.findByUserId(userId);
+        Doctor doctor = patientService.findByUserId(userId);
 
-        if(patient == null) {
+        if(doctor == null) {
             throw new RuntimeException("User id not found -"+userId);
         }
 

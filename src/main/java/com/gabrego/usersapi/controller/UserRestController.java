@@ -1,8 +1,6 @@
 package com.gabrego.usersapi.controller;
 
-import com.gabrego.usersapi.entity.Patient;
 import com.gabrego.usersapi.entity.User;
-import com.gabrego.usersapi.service.PatientService;
 import com.gabrego.usersapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
