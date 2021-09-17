@@ -24,7 +24,7 @@ public class Doctor {
 
     @ManyToOne
     @JoinColumn(name = "identification_id", referencedColumnName = "id")
-    private Identification identification;
+    private Identification identification_id;
 
     @Column(name = "num_id", nullable = false, length = 25)
     private String num_id;
@@ -50,11 +50,11 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(int id, User user_id, String speciality, Identification identification, String num_id, String num_reg_doc, String availability, Status status) {
+    public Doctor(int id, User user_id, String speciality, Identification identification_id, String num_id, String num_reg_doc, String availability, Status status) {
         this.id = id;
         this.user_id = user_id;
         this.speciality = speciality;
-        this.identification = identification;
+        this.identification_id = identification_id;
         this.num_id = num_id;
         this.num_reg_doc = num_reg_doc;
         this.availability = availability;
@@ -85,12 +85,12 @@ public class Doctor {
         this.speciality = speciality;
     }
 
-    public Identification getIdentification() {
-        return identification;
+    public Identification getIdentification_id() {
+        return identification_id;
     }
 
-    public void setIdentification(Identification identification) {
-        this.identification = identification;
+    public void setIdentification_id(Identification identification) {
+        this.identification_id = identification;
     }
 
     public String getNum_id() {
@@ -143,12 +143,18 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id +
+        return "{" + '\'' +
+                "id=" + id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", status='" + status + '\'' +
+                ", speciality=" + speciality + '\'' +
+                ", identification=" + identification_id + '\'' +
+                ", num_id=" + num_id + '\'' +
+                ", num_reg_doc=" + num_reg_doc + '\'' +
+                ", availability=" + availability + '\'' +
+                ", status=" + status + '\'' +
                 ", created_at='" + created_at + '\'' +
-                ", updatedAt=" + updated_at +
+                ", updatedAt=" + updated_at + '\'' +
                 '}';
     }
 }

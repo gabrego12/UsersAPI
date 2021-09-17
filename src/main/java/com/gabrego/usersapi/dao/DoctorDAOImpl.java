@@ -1,6 +1,7 @@
 package com.gabrego.usersapi.dao;
 
 import com.gabrego.usersapi.entity.Doctor;
+import com.gabrego.usersapi.entity.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

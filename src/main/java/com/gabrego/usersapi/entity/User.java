@@ -35,11 +35,11 @@ public class User {
     private Status status;
 
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     @CreationTimestamp
     private Date created_at;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updated_at;
 
@@ -130,16 +130,16 @@ public class User {
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id +
+        return "{" + '\'' +
+                "id=" + id + + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", remember=" + remember +
-                ", user_type=" + user_type +
-                ", status=" + status +
-                ", createdAt=" + created_at +
-                ", updatedAt=" + updated_at +
+                ", remember=" + remember + '\'' +
+                ", user_type=" + user_type + '\'' +
+                ", status=" + status + '\'' +
+                ", createdAt=" + created_at + '\'' +
+                ", updatedAt=" + updated_at + '\'' +
                 '}';
     }
 }

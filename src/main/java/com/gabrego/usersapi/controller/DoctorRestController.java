@@ -2,7 +2,7 @@ package com.gabrego.usersapi.controller;
 
 import com.gabrego.usersapi.entity.Doctor;
 import com.gabrego.usersapi.entity.User;
-import com.gabrego.usersapi.service.PatientService;
+import com.gabrego.usersapi.service.DoctorService;
 import com.gabrego.usersapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,26 +11,39 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
-@RequestMapping("/usersapi/patients")
-public class PatientRestController {
+@RequestMapping("/usersapi/doctors")
+public class DoctorRestController {
 
     @Autowired
-    private PatientService patientService;
+    private DoctorService doctorService;
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/")
-    public List<Doctor> findAllPatient() {
-        return patientService.findAll();
+    public List<Doctor> findAllDoctors() {
+        return doctorService.findAll();
     }
 
     @GetMapping("/{userId}")
-    public Doctor getPatientById(@PathVariable int userId){
-        Doctor doctor = patientService.findById(userId);
+    public Doctor getDoctorById(@PathVariable int userId){
+        Doctor doctor = doctorService.findById(userId);
 
         if(doctor == null) {
-            throw new RuntimeException("User id not found -"+userId);
+            throw new RuntimeException("User id not found - "+userId);
+        }
+        //retornará al usuario con id pasado en la url
+        System.out.println(doctor);
+        return doctor;
+    }
+
+    @GetMapping("/email/{email}")
+    public Doctor getDoctorByEmail(@PathVariable String email){
+        User user = userService.findByEmail(email);
+        Doctor doctor = doctorService.findByUserId(user.getId());
+
+        if(doctor == null) {
+            throw new RuntimeException("Doctor email not found - "+ email);
         }
         //retornará al usuario con id pasado en la url
         System.out.println(doctor);
@@ -38,12 +51,12 @@ public class PatientRestController {
     }
 
     @PostMapping("/")
-    public Doctor addPatient(@RequestBody Doctor doctor) {
+    public Doctor addDoctor(@RequestBody Doctor doctor) {
         doctor.setId(0);
         User user = userService.findById(doctor.getUser_id().getId());
         doctor.setUser_id(user);
         //Este metodo guardará al usuario enviado
-        patientService.save(doctor);
+        doctorService.save(doctor);
 
         return doctor;
 
@@ -52,24 +65,24 @@ public class PatientRestController {
     @DeleteMapping("/{patientId}")
     public int deletePatientById(@PathVariable int patientId) {
 
-        Doctor doctor = patientService.findById(patientId);
+        Doctor doctor = doctorService.findById(patientId);
 
         if(doctor == null) {
             throw new RuntimeException("User id not found -"+patientId);
         }
 
-        return patientService.deleteById(patientId);
+        return doctorService.deleteById(patientId);
     }
 
     @DeleteMapping("users/patients/userid/{userId}")
     public int deletePatientByUserId(@PathVariable int userId) {
 
-        Doctor doctor = patientService.findByUserId(userId);
+        Doctor doctor = doctorService.findByUserId(userId);
 
         if(doctor == null) {
             throw new RuntimeException("User id not found -"+userId);
         }
 
-        return patientService.deleteByUserId(userId);
+        return doctorService.deleteByUserId(userId);
     }
 }

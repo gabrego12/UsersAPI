@@ -2,6 +2,7 @@ package com.gabrego.usersapi.dao;
 
 import com.gabrego.usersapi.entity.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,7 +44,9 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void save(User user) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(user);
+        transaction.commit();
     }
 
     @Override

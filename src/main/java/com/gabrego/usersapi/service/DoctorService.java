@@ -4,7 +4,7 @@ import com.gabrego.usersapi.entity.Doctor;
 
 import java.util.List;
 
-public interface PatientService {
+public interface DoctorService {
     public List<Doctor> findAll();
 
     public Doctor findById(int id);

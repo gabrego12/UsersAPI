@@ -65,7 +65,7 @@ public class UserRestController {
     }
 
     @DeleteMapping("users/{userId}")
-    public String deteteUser(@PathVariable int userId) {
+    public String deleteUser(@PathVariable int userId) {
 
         User user = userService.findById(userId);
 
