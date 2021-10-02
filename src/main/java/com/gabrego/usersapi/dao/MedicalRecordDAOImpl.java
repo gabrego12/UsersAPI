@@ -1,64 +1,61 @@
 package com.gabrego.usersapi.dao;
 
-import com.gabrego.usersapi.entity.Doctor;
+import com.gabrego.usersapi.entity.MedicalRecord;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class DoctorDAOImpl implements DoctorDAO {
+public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Autowired
     private EntityManager entityManager;
 
     @Override
-    public List<Doctor> findAll() {
+    public List<MedicalRecord> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Doctor> theQuery = currentSession.createQuery("FROM Doctor", Doctor.class);
-        List<Doctor> doctors = theQuery.getResultList();
-        return doctors;
+        Query<MedicalRecord> theQuery = currentSession.createQuery("FROM MedicalRecord", MedicalRecord.class);
+        List<MedicalRecord> medicalRecords = theQuery.getResultList();
+        return medicalRecords;
     }
 
     @Override
-    public Doctor findById(int id) {
+    public MedicalRecord findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Doctor doctor = currentSession.get(Doctor.class, id);
-        return doctor;
+        MedicalRecord medicalRecord = currentSession.get(MedicalRecord.class, id);
+        return medicalRecord;
     }
 
     @Override
-    public Doctor findByUserId(int id) {
+    public MedicalRecord findByUserId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Doctor> theQuery = currentSession.createQuery("FROM Doctor WHERE user_id.id=:idUser", Doctor.class);
+        Query<MedicalRecord> theQuery = currentSession.createQuery("FROM MedicalRecord WHERE user_id.id=:idUser", MedicalRecord.class);
         theQuery.setParameter("idUser", id);
         return theQuery.uniqueResult();
     }
 
     @Override
-    public void save(Doctor doctor) {
+    public void save(MedicalRecord medicalRecord) {
         Session currentSession = entityManager.unwrap(Session.class);
-        currentSession.saveOrUpdate(doctor);
+        currentSession.saveOrUpdate(medicalRecord);
     }
 
-    @Transactional
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Doctor> theQuery = currentSession.createQuery("DELETE FROM Doctor WHERE id=:idPatient");
-        theQuery.setParameter("idPatient", id);
+        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE id=:idRecord", MedicalRecord.class);
+        theQuery.setParameter("idRecord", id);
         return theQuery.executeUpdate();
     }
 
-    @Transactional
     @Override
     public int deleteByUserId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Doctor> theQuery = currentSession.createQuery("DELETE FROM Doctor WHERE user_id.id=:idUser");
+        Query<MedicalRecord> theQuery = currentSession.createQuery("DELETE FROM MedicalRecord WHERE user_id.id=:idUser", MedicalRecord.class);
         theQuery.setParameter("idUser", id);
         return theQuery.executeUpdate();
     }
