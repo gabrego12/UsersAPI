@@ -22,7 +22,7 @@ public class MedicalRestController {
     private UserService userService;
 
     @GetMapping("/")
-    public List<MedicalRecord> findAllDoctors() {
+    public List<MedicalRecord> findAllMedicalRecords() {
         return medicalService.findAll();
     }
 
