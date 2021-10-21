@@ -64,7 +64,7 @@ public class MedicalRestController {
     }
 
     @PutMapping("/")
-    public MedicalRecord updateUser(@RequestBody MedicalRecord medicalRecord) {
+    public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
 
         medicalService.save(medicalRecord);
 
