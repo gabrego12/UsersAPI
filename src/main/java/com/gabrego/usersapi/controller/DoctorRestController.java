@@ -62,6 +62,17 @@ public class DoctorRestController {
 
     }
 
+    @PutMapping("/")
+    public Doctor updateDoctor(@RequestBody Doctor doctor) {
+        System.out.println(doctor);
+        User user = userService.findById(doctor.getUser_id().getId());
+        doctor.setUser_id(user);
+        //Este metodo guardará al usuario enviado
+        doctorService.save(doctor);
+        return doctor;
+
+    }
+
     @DeleteMapping("/{patientId}")
     public int deletePatientById(@PathVariable int patientId) {
 
