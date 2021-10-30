@@ -20,6 +20,11 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public List<Doctor> findByClinicId(int id) {
+        return doctorDAO.findByClinicId(id);
+    }
+
+    @Override
     public Doctor findById(int id) {
         Doctor doctor = doctorDAO.findById(id);
         return doctor;

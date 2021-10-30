@@ -7,6 +7,8 @@ import java.util.List;
 public interface DoctorService {
     public List<Doctor> findAll();
 
+    public  List<Doctor> findByClinicId(int id);
+
     public Doctor findById(int id);
 
     public Doctor findByUserId(int id);

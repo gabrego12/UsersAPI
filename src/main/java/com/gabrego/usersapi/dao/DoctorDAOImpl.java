@@ -25,6 +25,15 @@ public class DoctorDAOImpl implements DoctorDAO {
     }
 
     @Override
+    public List<Doctor> findByClinicId(int id) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Doctor> theQuery = currentSession.createQuery("FROM Doctor WHERE clinic_id.id=:idClinica", Doctor.class);
+        theQuery.setParameter("idClinica", id);
+        List<Doctor> doctors = theQuery.getResultList();
+        return doctors;
+    }
+
+    @Override
     public Doctor findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
         Doctor doctor = currentSession.get(Doctor.class, id);

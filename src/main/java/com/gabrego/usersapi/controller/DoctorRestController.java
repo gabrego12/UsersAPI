@@ -25,6 +25,11 @@ public class DoctorRestController {
         return doctorService.findAll();
     }
 
+    @GetMapping("/clinic/{clinicId}")
+    public List<Doctor> findAllDoctors(@PathVariable int clinicId) {
+        return doctorService.findByClinicId(clinicId);
+    }
+
     @GetMapping("/{userId}")
     public Doctor getDoctorById(@PathVariable int userId){
         Doctor doctor = doctorService.findById(userId);
