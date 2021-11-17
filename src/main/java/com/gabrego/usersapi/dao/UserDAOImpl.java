@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -49,11 +50,12 @@ public class UserDAOImpl implements UserDAO {
         transaction.commit();
     }
 
+    @Transactional
     @Override
-    public void deleteById(int id) {
+    public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<User> theQuery = currentSession.createQuery("DELETE FROM User WHERE id=:idUser");
         theQuery.setParameter("idUser", id);
-        theQuery.executeUpdate();
+        return theQuery.executeUpdate();
     }
 }

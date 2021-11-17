@@ -35,7 +35,7 @@ public class DoctorRestController {
         Doctor doctor = doctorService.findById(userId);
 
         if(doctor == null) {
-            throw new RuntimeException("User id not found - "+userId);
+            return new Doctor();
         }
         //retornará al usuario con id pasado en la url
         System.out.println(doctor);
@@ -48,7 +48,7 @@ public class DoctorRestController {
         Doctor doctor = doctorService.findByUserId(user.getId());
 
         if(doctor == null) {
-            throw new RuntimeException("Doctor email not found - "+ email);
+            return new Doctor();
         }
         //retornará al usuario con id pasado en la url
         System.out.println(doctor);
@@ -84,7 +84,7 @@ public class DoctorRestController {
         Doctor doctor = doctorService.findById(patientId);
 
         if(doctor == null) {
-            throw new RuntimeException("User id not found -"+patientId);
+            return 0;
         }
 
         return doctorService.deleteById(patientId);
@@ -96,7 +96,7 @@ public class DoctorRestController {
         Doctor doctor = doctorService.findByUserId(userId);
 
         if(doctor == null) {
-            throw new RuntimeException("User id not found -"+userId);
+            return 0;
         }
 
         return doctorService.deleteByUserId(userId);

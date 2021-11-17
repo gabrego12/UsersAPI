@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -44,6 +45,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
         currentSession.saveOrUpdate(medicalRecord);
     }
 
+    @Transactional
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
@@ -52,6 +54,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
         return theQuery.executeUpdate();
     }
 
+    @Transactional
     @Override
     public int deleteByUserId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);

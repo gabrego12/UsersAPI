@@ -26,7 +26,7 @@ public class UserRestController {
         User user = userService.findById(userId);
 
         if(user == null) {
-            throw new RuntimeException("User id not found -"+userId);
+            return new User();
         }
         //retornará al usuario con id pasado en la url
         return user;
@@ -37,7 +37,7 @@ public class UserRestController {
         User user = userService.findByEmail(userEmail);
 
         if(user == null) {
-            throw new RuntimeException("User email not found -" + userEmail);
+            return new User();
         }
         //retornará al usuario con id pasado en la url
         return user;
@@ -65,18 +65,18 @@ public class UserRestController {
     }
 
     @DeleteMapping("users/{userId}")
-    public String deleteUser(@PathVariable int userId) {
+    public int deleteUser(@PathVariable int userId) {
 
         User user = userService.findById(userId);
 
         if(user == null) {
-            throw new RuntimeException("User id not found -"+userId);
+            return 0;
         }
 
-        userService.deleteById(userId);
+
 
         //Esto método, recibira el id de un usuario por URL y se borrará de la bd.
-        return "Deleted user id - "+userId;
+        return userService.deleteById(userId);
     }
 
     
