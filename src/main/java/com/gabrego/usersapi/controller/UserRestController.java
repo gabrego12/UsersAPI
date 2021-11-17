@@ -73,9 +73,6 @@ public class UserRestController {
             return 0;
         }
 
-
-
-        //Esto método, recibira el id de un usuario por URL y se borrará de la bd.
         return userService.deleteById(userId);
     }
 
