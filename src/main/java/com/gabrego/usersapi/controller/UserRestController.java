@@ -47,8 +47,13 @@ public class UserRestController {
     public User addUser(@RequestBody User user) {
         user.setId(0);
 
-        //Este metodo guardará al usuario enviado
-        userService.save(user);
+        User user1 = userService.findByEmail(user.getEmail());
+
+        if (user1.getEmail() == null) {
+            userService.save(user);
+        } else {
+            return new User();
+        }
 
         return user;
 
