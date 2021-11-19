@@ -49,7 +49,7 @@ public class UserRestController {
 
         User user1 = userService.findByEmail(user.getEmail());
 
-        if (user1.getEmail() == null) {
+        if (user1 == null) {
             userService.save(user);
         } else {
             return new User();
