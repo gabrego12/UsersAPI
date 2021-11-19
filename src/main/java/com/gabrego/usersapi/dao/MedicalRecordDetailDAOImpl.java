@@ -3,6 +3,7 @@ package com.gabrego.usersapi.dao;
 import com.gabrego.usersapi.entity.MedicalRecord;
 import com.gabrego.usersapi.entity.MedicalRecordDetail;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,7 +54,9 @@ public class MedicalRecordDetailDAOImpl implements MedicalRecordDetailDAO {
     @Override
     public void save(MedicalRecordDetail medicalRecordDetail) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(medicalRecordDetail);
+        transaction.commit();
     }
 
     @Transactional
