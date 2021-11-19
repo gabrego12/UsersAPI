@@ -43,7 +43,7 @@ public class StatusDAOImpl implements StatusDAO{
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Status> theQuery = currentSession.createQuery("DELETE FROM Status WHERE id=:idStatus", Status.class);
+        Query<Status> theQuery = currentSession.createQuery("DELETE FROM Status WHERE id=:idStatus");
         theQuery.setParameter("idStatus", id);
         return theQuery.executeUpdate();
     }

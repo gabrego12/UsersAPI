@@ -43,7 +43,7 @@ public class IdentificationDAOImpl implements IdentificationDAO{
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Identification> theQuery = currentSession.createQuery("DELETE FROM Identification WHERE id=:idIdentification", Identification.class);
+        Query<Identification> theQuery = currentSession.createQuery("DELETE FROM Identification WHERE id=:idIdentification");
         theQuery.setParameter("idIdentification", id);
         return theQuery.executeUpdate();
     }

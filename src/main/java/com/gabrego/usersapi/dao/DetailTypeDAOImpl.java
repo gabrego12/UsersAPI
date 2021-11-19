@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -38,10 +39,11 @@ public class DetailTypeDAOImpl implements DetailTypeDAO{
         transaction.commit();
     }
 
+    @Transactional
     @Override
     public int deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<DetailType> theQuery = currentSession.createQuery("DELETE FROM DetailType WHERE id=:idType", DetailType.class);
+        Query<DetailType> theQuery = currentSession.createQuery("DELETE FROM DetailType WHERE id=:idType");
         theQuery.setParameter("idType", id);
         return theQuery.executeUpdate();
     }
