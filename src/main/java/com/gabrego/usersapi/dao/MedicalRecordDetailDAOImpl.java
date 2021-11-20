@@ -43,6 +43,16 @@ public class MedicalRecordDetailDAOImpl implements MedicalRecordDetailDAO {
     }
 
     @Override
+    public List<MedicalRecordDetail> findByUserIdAndTypeId(int userId, int typeId) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<MedicalRecordDetail> theQuery = currentSession.createQuery("FROM MedicalRecordDetail WHERE appointment_id.patient_id.id=:idPatient AND detailType_id.id=:idType", MedicalRecordDetail.class);
+        theQuery.setParameter("idPatient", userId);
+        theQuery.setParameter("idType", typeId);
+        List<MedicalRecordDetail> medicalRecordDetails = theQuery.getResultList();
+        return medicalRecordDetails;
+    }
+
+    @Override
     public List<MedicalRecordDetail> findByPatientId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<MedicalRecordDetail> theQuery = currentSession.createQuery("FROM MedicalRecordDetail WHERE appointment_id.patient_id.id=:idPatient", MedicalRecordDetail.class);

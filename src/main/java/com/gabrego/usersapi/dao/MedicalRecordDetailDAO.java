@@ -11,6 +11,8 @@ public interface MedicalRecordDetailDAO {
 
     public List<MedicalRecordDetail> findByAppointmentId(int id);
 
+    public List<MedicalRecordDetail> findByUserIdAndTypeId(int userId, int typeId);
+
     public List<MedicalRecordDetail> findByPatientId(int id);
 
     public void save(MedicalRecordDetail medicalRecordDetail);

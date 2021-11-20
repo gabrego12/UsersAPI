@@ -29,6 +29,11 @@ public class MedicalDetailServiceImpl implements MedicalDetailService{
     }
 
     @Override
+    public List<MedicalRecordDetail> findByUserIdAndTypeId(int userId, int typeId) {
+        return medicalRecordDetailDAO.findByUserIdAndTypeId(userId, typeId);
+    }
+
+    @Override
     public List<MedicalRecordDetail> findByPatientId(int id) {
         return medicalRecordDetailDAO.findByPatientId(id);
     }

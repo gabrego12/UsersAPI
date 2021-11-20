@@ -66,6 +66,18 @@ public class MedicalDetailRestController {
         return medicalRecordDetails;
     }
 
+    @GetMapping("/patient/{patientId}/{typeId}")
+    public List<MedicalRecordDetail> getByPatientIdAndType(@PathVariable int patientId, @PathVariable int typeId){
+
+        List<MedicalRecordDetail> medicalRecordDetails = medicalDetailService.findByUserIdAndTypeId(patientId, typeId);
+
+        if(medicalRecordDetails == null) {
+            return Collections.emptyList();
+        }
+
+        return medicalRecordDetails;
+    }
+
     @PostMapping("/")
     public MedicalRecordDetail addMedicalRecordDetail(@RequestBody MedicalRecordDetail medicalRecordDetail) {
         medicalRecordDetail.setId(0);
