@@ -82,7 +82,7 @@ public class MedicalRecordDetailDAOImpl implements MedicalRecordDetailDAO {
     @Override
     public int deleteByAppointmentId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<MedicalRecordDetail> theQuery = currentSession.createQuery("DELETE FROM MedicalRecordDetail WHERE appointment_id.id=:idAppointment", MedicalRecordDetail.class);
+        Query<MedicalRecordDetail> theQuery = currentSession.createQuery("DELETE FROM MedicalRecordDetail WHERE appointment_id.id=:idAppointment");
         theQuery.setParameter("idAppointment", id);
         return theQuery.executeUpdate();
     }
